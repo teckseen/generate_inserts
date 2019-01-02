@@ -202,7 +202,7 @@ DECLARE		@Column_ID int,
 		@Column_Name varchar(128),
 		@Start_Insert varchar(786),
 		@Data_Type varchar(128),
-		@Actual_Values varchar(8000),	--This is the string that will be finally executed to generate INSERT statements
+		@Actual_Values varchar(max),	--This is the string that will be finally executed to generate INSERT statements
 		@IDN varchar(128)		--Will contain the IDENTITY column's name in the table
 
 --Variable Initialization

@@ -37,7 +37,7 @@ BEGIN
 
 /***********************************************************************************************************
 Procedure:	sp_generate_inserts  (Build 22)
-		(Copyright © 2002 Narayana Vyas Kondreddi. All rights reserved.)
+		(Copyright Â© 2002 Narayana Vyas Kondreddi. All rights reserved.)
 
 Purpose:	To generate INSERT statements from existing data.
 		These INSERTS can be executed to regenerate the data at some other location.
@@ -298,6 +298,9 @@ WHILE @Column_ID IS NOT NULL
 		--making sure, not to lose any data from flot, real, money, smallmomey, datetime columns
 		SET @Actual_Values = @Actual_Values  +
 		CASE
+			WHEN @Data_Type IN ('xml')
+				THEN
+					'COALESCE('''''''' + REPLACE(RTRIM(' + 'CONVERT(varchar(max), ' +  @Column_Name + ')),'''''''','''''''''''')+'''''''',''NULL'')'
 			WHEN @Data_Type IN ('char','varchar','nchar','nvarchar')
 				THEN
 					'COALESCE('''''''' + REPLACE(RTRIM(' + @Column_Name + '),'''''''','''''''''''')+'''''''',''NULL'')'
